@@ -1,0 +1,36 @@
+<h1>{{ title }}</h1>
+<div class="list-group">
+  
+  <a href="#" ng-repeat="item in subjects | limitTo: count: startPage" class="list-group-item">
+      <span class="badge">{{ '暂无评分' }}</span>
+      <div class="media">
+          <div class="media-left">
+              <img class="media-object" ng-src="{{item.images.small}" alt="">
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">{{ item.title }} &nbsp; <span>(原名: {{ item.original_title }})</span> </h4>
+            <p>类型: <span ng-repeat='x in item.genres'>{{ x ? x : '暂无' }} </span> </p>
+            <p>导演: <span >{{ x.name ? x.name : '暂无' }}<span ng-if='x.name && !$last'>、</span ></span></p>
+            <p>主演:  <span ng-repeat="x in item.casts">{{ x.name }}<span ng-if='!$last'>、</span > </span> </p>
+          </div>
+        </div>
+  </a>
+
+</div>
+<div  ng-show='!lodding' >
+    <p> 总共:{{ totalCount }} 条记录, {{ currentPage}} / {{totalPages }}页</p>
+    <nav>
+        <ul class="pager">
+          <li  ng-class="{ disabled:currentPage<=1}"><a ng-click='go(currentPage-1)'><<上一页</a ></li>
+          <li ng-class="{ disabled:currentPage>=totalPages}"><a ng-click='go(currentPage+1)'>下一页>></a ></li>
+        </ul>
+      </nav>
+</div>
+<div class="box" ng-show="lodding">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+    <div class="rect5"></div>
+</div>
